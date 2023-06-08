@@ -2,19 +2,23 @@ import { useState } from "react"
 import ContentLoader, { Rect, Circle, Path } from "react-content-loader/native"
 import { Dimensions } from "react-native"
 
-export const TitleLoader = (props={}) => (
-  <ContentLoader 
-    speed={1}
-    width={400}
-    height={30}
-    viewBox="0 0 400 30"
-    backgroundColor="#d3ecf4"
-    foregroundColor="#ecebeb"
-    {...props}
-  >
-    <Rect x="15" y="15" rx="5" ry="5" width="220" height="15" />
-  </ContentLoader>
-)
+export const TitleLoader = (props = {}) => {
+  const [windowWidth, setWindowWidth] = useState(Dimensions.get('window').width);
+    let viewBox = `0 0 ${windowWidth} 40`;
+  return (
+    <ContentLoader
+      speed={1}
+      width={windowWidth}
+      height={40}
+      viewBox={viewBox}
+      backgroundColor="#f7f7f7"
+      foregroundColor="#ecebeb"//"#ecebeb"
+      {...props}
+    >
+      <Rect x="15" y="0" rx="7" ry="7" width={windowWidth-(windowWidth*0.4)} height="18" />
+    </ContentLoader>
+  )
+}
 
 export const BlogCardLoader = (props = {}) => {
     const [windowWidth, setWindowWidth] = useState(Dimensions.get('window').width);
@@ -25,8 +29,8 @@ export const BlogCardLoader = (props = {}) => {
       width={windowWidth}
       height={400}
       viewBox={viewBox}
-      backgroundColor="#d3ecf4"
-      foregroundColor="#ecebeb"
+      backgroundColor="#f7f7f7"
+      foregroundColor="#dcdbdb"//"#ecebeb"
       {...props}
     >
       <Rect x="15" y="0" rx="0" ry="0" width={windowWidth-30} height="200" /> 

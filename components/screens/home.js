@@ -92,21 +92,20 @@ export default function Home() {
             <SafeAreaView>
                 {/* <ScrollView > */}
                     <SafeAreaView>
-                        <View style={styles.logoview}>
-                            <Text style={styles.logotext}>ABCD</Text>
-                        </View>
                         <SearchBar />
 
                     </SafeAreaView>
-                    <View horizontal={true} style={{display:'flex',flexDirection:'row',justifyContent:'space-around',marginBottom:40}}>
+                    <View horizontal={true} style={{display:'flex',flexDirection:'row',justifyContent:'space-around',marginBottom:15}}>
                        <TabButton title='For you' id={TABS.forYou} />
                         <TabButton title='Topics' id={TABS.Topics} />
                         <TabButton title='Courses' id={TABS.Courses} />
                         <TabButton title='Reading' id={TABS.Reading} />
                     </View>
                 
-                <ScrollView contentContainerStyle={{ display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
-                <BlogCardLoader style={{ marginTop:100} } />
+                <ScrollView contentContainerStyle={{ display: 'flex', justifyContent: 'center',paddingTop:20 }}>
+                    <TitleLoader style={{ marginBottom:15} }/>
+                    <BlogCardLoader style={{ marginTop: 0 }} />
+                    <BlogCardLoader style={{ marginTop:0} } />
                 </ScrollView>
                 {/* </ScrollView> */}
 
