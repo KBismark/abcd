@@ -1,10 +1,30 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ContentLoader, { Rect, Circle, Path } from "react-content-loader/native"
 import { Dimensions } from "react-native"
 
+
+const privateState = {
+
+}
+const DimensionsListener = Dimensions.addEventListener('change', (window, screen) => {
+  for (let i in privateState) {
+    privateState[i](window.width);
+  }
+})
 export const TitleLoader = (props = {}) => {
   const [windowWidth, setWindowWidth] = useState(Dimensions.get('window').width);
-    let viewBox = `0 0 ${windowWidth} 40`;
+  const [viewBox, setViewBox] = useState(`0 0 ${windowWidth} 40`);
+  privateState.title = setWindowWidth;
+  useEffect(() => {
+    return () => {
+      privateState.title = undefined;
+      delete privateState.title;
+    }
+  })
+  // privateState.title = (wimdow) => {
+  //   setWindowWidth(window.width);
+  //   //setViewBox
+  // };
   return (
     <ContentLoader
       speed={1}
@@ -22,7 +42,14 @@ export const TitleLoader = (props = {}) => {
 
 export const BlogCardLoader = (props = {}) => {
     const [windowWidth, setWindowWidth] = useState(Dimensions.get('window').width);
-    let viewBox = `0 0 ${windowWidth} 400`;
+  const [viewBox, setViewBox] = useState(`0 0 ${windowWidth} 400`);
+  privateState.blogCard = setWindowWidth;
+  useEffect(() => {
+    return () => {
+      privateState.blogCard = undefined;
+      delete privateState.blogCard;
+    }
+  })
     return (
     <ContentLoader 
       speed={1}
@@ -33,7 +60,7 @@ export const BlogCardLoader = (props = {}) => {
       foregroundColor="#dcdbdb"//"#ecebeb"
       {...props}
     >
-      <Rect x="15" y="0" rx="0" ry="0" width={windowWidth-30} height="200" /> 
+      <Rect x="15" y="0" rx="10" ry="10" width={windowWidth-30} height="200" /> 
       <Circle cx="30" cy="230" r="17" /> 
       <Rect x="55" y="226" rx="0" ry="0" width="136" height="11" /> 
       <Rect x="30" y="260" rx="0" ry="0" width={windowWidth-60} height="11" /> 

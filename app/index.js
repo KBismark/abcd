@@ -1,12 +1,13 @@
 
 import { View, Text, ScrollView,TextInput, StyleSheet, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import theme from '../theme';
+import theme from '../components/theme';
 import { Button, Input,  makeStyles, useTheme } from '@rneui/themed';
-import { Dismiss, Search } from '../icons/fluent';
+import { Dismiss, Search } from '../components/icons/fluent';
 import { useState } from 'react';
-import Container from '../container';
-import { BlogCardLoader, TitleLoader } from '../loaders/loaders';
+import Container from '../components/container';
+import { BlogCardLoader, TitleLoader } from '../components/loaders/loaders';
+import { useRouter } from "expo-router";
 
 const TABS = {
     forYou: 1,
@@ -64,7 +65,8 @@ function SearchBar() {
     )
 }
 
-function TabButton({id, title, onClick = () => { } }) {
+function TabButton({ id, title, onClick = () => { } }) {
+    
     const { theme, replaceTheme } = useTheme();
     const [isActive, setAsActive] = useState(id == privateState.activeTab);
     if (isActive) {
@@ -87,8 +89,9 @@ export default function Home() {
     
     //let activeTab = { id: TABS.forYou };
     const { theme, replaceTheme } = useTheme();
+    const router = useRouter();
     return (
-        <Container>
+        <Container home={true}>
             <SafeAreaView>
                 {/* <ScrollView > */}
                     <SafeAreaView>
@@ -101,7 +104,15 @@ export default function Home() {
                     <View horizontal={true} style={{display:'flex',flexDirection:'row',justifyContent:'space-around',marginBottom:15}}>
                        <TabButton title='For you' id={TABS.forYou} />
                         <TabButton title='Topics' id={TABS.Topics} />
-                        <TabButton title='Courses' id={TABS.Courses} />
+                        <TabButton title='Courses' id={TABS.Courses} onClick={() => {
+                            router.push({
+                                pathname: '/screens',
+                                params: {
+                                    id: TABS.Courses,
+                                    title:'Courses'
+                                }
+                            })
+                        }} />
                         <TabButton title='Reading' id={TABS.Reading} />
                     </View>
                     <BlogCardLoader style={{ marginTop: 0 }} />

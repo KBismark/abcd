@@ -1,12 +1,13 @@
 
 import { View, Text, ScrollView,TextInput, StyleSheet, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import theme from '../theme';
+import theme from '../../components/theme';
 import { Button, Input,  makeStyles, useTheme } from '@rneui/themed';
-import { Dismiss, Search } from '../icons/fluent';
+import { Dismiss, Search } from '../../components/icons/fluent';
 import { useState } from 'react';
-import Container from '../container';
-import { BlogCardLoader, TitleLoader } from '../loaders/loaders';
+import Container from '../../components/container';
+import { BlogCardLoader } from '../../components/loaders/loaders';
+
 
 const TABS = {
     forYou: 1,
@@ -88,27 +89,14 @@ export default function Home() {
     //let activeTab = { id: TABS.forYou };
     const { theme, replaceTheme } = useTheme();
     return (
-        <Container>
+        <Container home={false}>
             <SafeAreaView>
-                {/* <ScrollView > */}
-                    <SafeAreaView>
-                        <SearchBar />
-
-                    </SafeAreaView>
-                   
                 
-                <ScrollView contentContainerStyle={{ display: 'flex', justifyContent: 'center',paddingTop:20 }}>
-                    <View horizontal={true} style={{display:'flex',flexDirection:'row',justifyContent:'space-around',marginBottom:15}}>
-                       <TabButton title='For you' id={TABS.forYou} />
-                        <TabButton title='Topics' id={TABS.Topics} />
-                        <TabButton title='Courses' id={TABS.Courses} />
-                        <TabButton title='Reading' id={TABS.Reading} />
-                    </View>
+                <ScrollView contentContainerStyle={{ display: 'flex', justifyContent: 'center', paddingTop: 0 }}>
+                    <SafeAreaView></SafeAreaView>
                     <BlogCardLoader style={{ marginTop: 0 }} />
                     <BlogCardLoader style={{ marginTop:0} } />
                 </ScrollView>
-                {/* </ScrollView> */}
-
             </SafeAreaView>
         </Container>
        
