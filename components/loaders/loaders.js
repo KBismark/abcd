@@ -68,3 +68,66 @@ export const BlogCardLoader = (props = {}) => {
       <Rect x="30" y="300" rx="0" ry="0" width={windowWidth-60} height="8" />
     </ContentLoader>
   )}
+
+export const TopicCardLoader = (props = {}) => {
+  const [windowWidth, setWindowWidth] = useState(Dimensions.get('window').width);
+const [viewBox, setViewBox] = useState(`0 0 ${windowWidth} 120`);
+  const size = windowWidth - 136;
+  const tags = size * 0.4;
+  const space = size * 0.2;
+privateState.topicCard = setWindowWidth;
+useEffect(() => {
+  return () => {
+    privateState.topicCard = undefined;
+    delete privateState.topicCard;
+  }
+})
+  return (
+  <ContentLoader 
+    speed={1}
+    width={windowWidth}
+    height={120}
+    viewBox={viewBox}
+    backgroundColor="#f7f7f7"
+    foregroundColor="#dcdbdb"//"#ecebeb"
+    {...props}
+  >
+    <Rect x="15" y="0" rx="5" ry="5" width="87" height="68" /> 
+    <Rect x="111" y="5" rx="0" ry="0" width={size} height="11" /> 
+    <Rect x="111" y="21" rx="0" ry="0" width={size} height="11" /> 
+    <Rect x="111" y="47" rx="0" ry="0" width={tags} height="11" /> 
+    <Rect x={111+tags+space} y="47" rx="0" ry="0" width={tags} height="11" />
+  </ContentLoader>
+)
+}
+ 
+export const ReadCardLoader = (props = {}) => {
+  const [windowWidth, setWindowWidth] = useState(Dimensions.get('window').width);
+const [viewBox, setViewBox] = useState(`0 0 ${windowWidth} 110`);
+  const size = windowWidth - 30;
+  const tags = size * 0.35;
+  const space = size * 0.3;
+privateState.readCard = setWindowWidth;
+useEffect(() => {
+  return () => {
+    privateState.readCard = undefined;
+    delete privateState.readCard;
+  }
+})
+  return (
+  <ContentLoader 
+    speed={1}
+    width={windowWidth}
+    height={110}
+    viewBox={viewBox}
+    backgroundColor="#f7f7f7"
+    foregroundColor="#dcdbdb"//"#ecebeb"
+    {...props}
+  >
+    <Rect x="15" y="0" rx="0" ry="0" width={size} height="14" /> 
+    <Rect x="15" y="19" rx="0" ry="0" width={size} height="14" /> 
+    <Rect x="15" y="45" rx="0" ry="0" width={tags} height="11" /> 
+    <Rect x={15+tags+space} y="42" rx="0" ry="0" width={tags} height="11" />
+  </ContentLoader>
+)
+}

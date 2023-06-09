@@ -68,20 +68,20 @@ function SearchBar() {
 function TabButton({ id, title, onClick = () => { } }) {
     
     const { theme, replaceTheme } = useTheme();
-    const [isActive, setAsActive] = useState(id == privateState.activeTab);
-    if (isActive) {
-        privateState.setActiveTab = setAsActive;
-        privateState.activeTab = id;
-    }
+    // const [isActive, setAsActive] = useState(id == privateState.activeTab);
+    // if (isActive) {
+    //     privateState.setActiveTab = setAsActive;
+    //     privateState.activeTab = id;
+    // }
     function onPress() {
-        if (privateState.activeTab == id) {
+        if (TABS.forYou == id) {
             return
         }
-        privateState.setActiveTab(false);
-        setAsActive(true);
+        // privateState.setActiveTab(false);
+        // setAsActive(true);
         onClick(id);
     }
-    return  <Button title={title} onPress={onPress} buttonStyle={{borderRadius:6, backgroundColor:isActive?theme.colors.grey1:theme.colors.white}} titleStyle={{ color: theme.colors.black }} />
+    return  <Button title={title} onPress={onPress} buttonStyle={{borderRadius:6, backgroundColor:id==TABS.forYou?theme.colors.grey1:theme.colors.white}} titleStyle={{ color: theme.colors.black }} />
 }
 
 //,'#d3ecf4'
@@ -103,17 +103,33 @@ export default function Home() {
                 <ScrollView contentContainerStyle={{ display: 'flex', justifyContent: 'center',paddingTop:20 }}>
                     <View horizontal={true} style={{display:'flex',flexDirection:'row',justifyContent:'space-around',marginBottom:15}}>
                        <TabButton title='For you' id={TABS.forYou} />
-                        <TabButton title='Topics' id={TABS.Topics} />
+                        <TabButton title='Topics' id={TABS.Topics} onClick={() => {
+                            router.push({
+                                pathname: '/screens/topics',
+                                params: {
+                                    id: TABS.Topics,
+                                    title:'Topics'
+                                }
+                            })
+                        }} />
                         <TabButton title='Courses' id={TABS.Courses} onClick={() => {
                             router.push({
-                                pathname: '/screens',
+                                pathname: '/screens/courses',
                                 params: {
                                     id: TABS.Courses,
                                     title:'Courses'
                                 }
                             })
                         }} />
-                        <TabButton title='Reading' id={TABS.Reading} />
+                        <TabButton title='Reading' id={TABS.Reading} onClick={() => {
+                            router.push({
+                                pathname: '/screens/reading',
+                                params: {
+                                    id: TABS.Reading,
+                                    title:'Reading List'
+                                }
+                            })
+                        }} />
                     </View>
                     <BlogCardLoader style={{ marginTop: 0 }} />
                     <BlogCardLoader style={{ marginTop:0} } />

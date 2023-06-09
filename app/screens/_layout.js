@@ -8,11 +8,17 @@ export default function ScreenLayout() {
     const params = useSearchParams();
     return (
         <Stack screenOptions={{
-            presentation: 'modal',
+            presentation: 'card',
             headerSearchBarOptions: {
                 barTintColor:'#ffffff',
                 tintColor: '#000000',
-                placeholder:`Search ${params.title.toLowerCase()}`
+                placeholder: `Search ${params.title.toLowerCase()}`,
+                onChangeText: (event) => {
+                    
+                },
+                onCancelButtonPress: () => {
+                    
+                }
             },
             headerTransparent: false,
             headerTitle: params.title,
@@ -20,11 +26,9 @@ export default function ScreenLayout() {
             // headerStyle: {
             //     backgroundColor:'#45cdf7'//'#61d3f7'//'#0bbcf4'
             // },
-            headerBackground: (props={children:<Text></Text>}) => {
+            headerBackground: () => {
                 return (
-                    <LinearGradient colors={['#fbfbfb', '#0bbcf4']} start={{ x: 0, y: 1 }} end={{ x: 0, y: 0 }} style={{flex:1}} >
-                        
-                    </LinearGradient>
+                    <LinearGradient colors={['#fbfbfb', '#0bbcf4']} start={{ x: 0, y: 1 }} end={{ x: 0, y: 0 }} style={{flex:1}} ></LinearGradient>
                 )
             }
         }}/>
